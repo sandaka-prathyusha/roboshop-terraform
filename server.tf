@@ -161,7 +161,8 @@ resource "aws_instance" "payment" {
     Name = "payment"
   }
 }
-resource "aws_route53_record" "payment"
+
+resource "aws_route53_record" "payment" {
   zone_id = "Z001151113ESNLT809BTY"
   name    = "payment-dev.nandu18.online"
   type    = "A"
