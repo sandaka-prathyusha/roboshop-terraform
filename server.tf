@@ -66,12 +66,15 @@ resource "aws_instance" "instance" {
   }
 }
 
-#resource "aws_route53_record" "frontend" {
-#  zone_id = "Z001151113ESNLT809BTY"
-#  name    = "frontend-dev.nandu18.online"
-#  type    = "A"
-#  ttl     = 30
-#  records = [aws_instance.frontend.private_ip]
-#}
+resource "aws_route53_record" "records" {
+  for_each = var.components
+  #how many times i need to loop it same var.components
+  zone_id = "Z001151113ESNLT809BTY"
+  name    = "${each.value["name"]}-dev.nandu18.online"
+  //nead to know about $ here
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.instance[each.value["name"]].private_ip]
+}
 
 
