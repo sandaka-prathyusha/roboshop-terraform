@@ -28,13 +28,13 @@ resource "aws_instance" "instance" {
   }
 }
 
-resource "aws_route53_record" "frontend" {
-  zone_id = "Z001151113ESNLT809BTY"
-  name    = "frontend-dev.nandu18.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.frontend.private_ip]
-}
+#resource "aws_route53_record" "frontend" {
+#  zone_id = "Z001151113ESNLT809BTY"
+#  name    = "frontend-dev.nandu18.online"
+#  type    = "A"
+#  ttl     = 30
+#  records = [aws_instance.frontend.private_ip]
+#}
 
 
 #resource "aws_instance" "mongodb" {
