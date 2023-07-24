@@ -10,7 +10,7 @@ data "aws_security_group" "allow-all" {
 
 
  variable "instance_type" {
-   default = "t3.small "
+   default = "t3.small"
  }
 
 variable "components" {
@@ -143,55 +143,55 @@ resource "aws_instance" "instance" {
 #  records = [aws_instance.mysql.private_ip]
 #}
 
-resource "aws_instance" "shipping" {
-  ami           = data.aws_ami.centos.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
-
-  tags = {
-    Name = "shipping"
-  }
-}
-resource "aws_route53_record" "shipping" {
-  zone_id = "Z001151113ESNLT809BTY"
-  name    = "shipping-dev.nandu18.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.shipping.private_ip]
-}
-
-resource "aws_instance" "rabbitmq" {
-  ami           = data.aws_ami.centos.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
-
-  tags = {
-    Name = "rabbitmq"
-  }
-}
-
-resource "aws_route53_record" "rabbitmq" {
-  zone_id = "Z001151113ESNLT809BTY"
-  name    = "rabbitmq-dev.nandu18.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.rabbitmq.private_ip]
-}
-
-resource "aws_instance" "payment" {
-  ami           = data.aws_ami.centos.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
-
-  tags = {
-    Name = "payment"
-  }
-}
-
-resource "aws_route53_record" "payment" {
-  zone_id = "Z001151113ESNLT809BTY"
-  name    = "payment-dev.nandu18.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.payment.private_ip]
-}
+#resource "aws_instance" "shipping" {
+#  ami           = data.aws_ami.centos.image_id
+#  instance_type = var.instance_type
+#  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
+#
+#  tags = {
+#    Name = "shipping"
+#  }
+#}
+#resource "aws_route53_record" "shipping" {
+#  zone_id = "Z001151113ESNLT809BTY"
+#  name    = "shipping-dev.nandu18.online"
+#  type    = "A"
+#  ttl     = 30
+#  records = [aws_instance.shipping.private_ip]
+#}
+#
+#resource "aws_instance" "rabbitmq" {
+#  ami           = data.aws_ami.centos.image_id
+#  instance_type = var.instance_type
+#  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
+#
+#  tags = {
+#    Name = "rabbitmq"
+#  }
+#}
+#
+#resource "aws_route53_record" "rabbitmq" {
+#  zone_id = "Z001151113ESNLT809BTY"
+#  name    = "rabbitmq-dev.nandu18.online"
+#  type    = "A"
+#  ttl     = 30
+#  records = [aws_instance.rabbitmq.private_ip]
+#}
+#
+#resource "aws_instance" "payment" {
+#  ami           = data.aws_ami.centos.image_id
+#  instance_type = var.instance_type
+#  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
+#
+#  tags = {
+#    Name = "payment"
+#  }
+#}
+#
+#resource "aws_route53_record" "payment" {
+#  zone_id = "Z001151113ESNLT809BTY"
+#  name    = "payment-dev.nandu18.online"
+#  type    = "A"
+#  ttl     = 30
+#  records = [aws_instance.payment.private_ip]
+#}
