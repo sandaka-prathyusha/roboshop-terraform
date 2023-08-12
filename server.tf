@@ -1,6 +1,6 @@
 
 resource "aws_instance" "instance" {
-  for_each = var.components
+  for_each      = var.components
   ami           = data.aws_ami.centos.image_id
   instance_type = each.value["instance_type"]
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
@@ -8,7 +8,31 @@ resource "aws_instance" "instance" {
   tags = {
     Name = each.value["name"]
   }
+
+
+#
+#connection can be within provisioner or outside
+
+  provisioner "remote-exec" {
+
+    connection {
+     type     = "ssh"
+     user     = "centos"
+     password = "DevOps321"
+     host     = self.private-ip
+   }
+  inline = [
+    #i have to declare list of commands here
+    "rm -rf roboshop-shell",
+    "git clone https://github.com/nandu18/roboshop-shell",
+    "cd roboshop-shell",
+    "sudo bash ${each.value["name"]}.sh"
+
+  ]
+ }
 }
+
+
 
 resource "aws_route53_record" "records" {
   for_each = var.components
