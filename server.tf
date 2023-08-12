@@ -10,7 +10,7 @@ resource "aws_instance" "instance" {
   }
 
 
-  #
+
   #connection can be within provisioner or outside
   resource "null_resource" "provisioner" {
     depends_on = [aws_instance.instance,aws_route53_record]
